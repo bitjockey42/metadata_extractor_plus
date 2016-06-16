@@ -31,4 +31,4 @@ def handler(event):
 
 
 def load(info):
-    events.bind('data.process', 'metadata_extractor_handler', handler)
+    events.daemon.trigger('data.process', 'metadata_extractor_handler', handler)
