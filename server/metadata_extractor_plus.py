@@ -41,6 +41,11 @@ class MetadataExtractor(object):
         self.itemId = itemId
         self.path = path
         self.metadata = None
+        self.attrs = ("dimensionality", "refine_by", "domain_dimensions",
+                      "current_time", "domain_left_edge", "domain_right_edge",
+                      "unique_identifier", "current_redshift", 
+                      "cosmological_simulation", "omega_matter", "omega_lambda",
+                      "hubble_constant", "dataset_type")
 
     def extractMetadata(self):
         """
@@ -56,6 +61,8 @@ class MetadataExtractor(object):
         """
         Extract metadata from file on client or server using hachoir-metadata.
         """
+        self.metadata = dict()
+
         attrs = ("dimensionality", "refine_by", "domain_dimensions",
                 "current_time", "domain_left_edge", "domain_right_edge",
                 "unique_identifier", "current_redshift", 
@@ -64,8 +71,8 @@ class MetadataExtractor(object):
 
         ds = load_dataset(self.path)
 
-        for attr in attrs:
-            self.metadata[key] = getattr(ds, attr, None)
+        for a in attrs:
+            self.metadata[a] = getattr(ds, a, None)
 
     def _setMetadata(self):
         """
