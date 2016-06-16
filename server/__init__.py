@@ -20,7 +20,7 @@
 from girder import events
 from girder.constants import AssetstoreType
 
-from . metadata_extractor_plus import ServerMetadataExtractor
+from . metadata_extractor import ServerMetadataExtractor
 
 
 def handler(event):
