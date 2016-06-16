@@ -34,5 +34,7 @@ Example:
 
 ::
    
-   ./test.py -p <path-to-dataset> -i <itemId>
+   cd /path/to/plugins/metadata_extractor_plus
+   ./test_metadata.py -p <path-to-dataset> -i <itemId>
 
+This will set the metadata for that file.
