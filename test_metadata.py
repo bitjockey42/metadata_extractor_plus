@@ -12,7 +12,7 @@ configureServer()
 DEFAULT_PATH="/Volumes/data/aj/Developer/data/yt/acisf05356N003_evt2.fits"
 DEFAULT_ITEMID="57631cb4e640ae56cbec1d5a"
 
-from girder.plugins.metadata_extractor_plus import metadata_extractor_plus as mep
+from girder.plugins.metadata_extractor_plus import metadata_extractor as mep
 from girder.utility.model_importer import ModelImporter
 
 def load_metadata(path, itemId):

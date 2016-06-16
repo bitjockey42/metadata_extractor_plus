@@ -70,13 +70,18 @@ class MetadataExtractor(object):
                  "omega_matter",
                  "omega_lambda",
                  "hubble_constant",
-                 "dataset_type",
-                 "parameters")
+                 "dataset_type")
 
         ds = load_dataset(self.path)
 
         for a in attrs:
             self.metadata[a] = str(getattr(ds, a, None))
+
+        parameters = getattr(ds, "parameters")
+
+        if parameters:
+            for key,value in parameters.iteritems():
+                self.metadata[key] = str(value)
 
     def _setMetadata(self):
         """
