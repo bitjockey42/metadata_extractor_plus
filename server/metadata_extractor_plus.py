@@ -76,7 +76,7 @@ class MetadataExtractor(object):
         ds = load_dataset(self.path)
 
         for a in attrs:
-            self.metadata[a] = getattr(ds, a, None)
+            self.metadata[a] = str(getattr(ds, a, None))
 
     def _setMetadata(self):
         """
