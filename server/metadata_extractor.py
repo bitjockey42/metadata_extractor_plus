@@ -77,11 +77,12 @@ class MetadataExtractor(object):
         ds = load_dataset(self.path)
 
         for a in attrs:
-            value = getattr(ds, a, None)
-            if isinstance(value, numpy.ndarray) and len(value.shape) > 0:
-                self.metadata[a] = [str(item) for item in value]
-            else:
-                self.metadata[a] = str(getattr(ds, a, None))
+            v = getattr(ds, a, None)
+            if v is None:
+                continue
+            if hasattr(v, "tolist"):
+                v = v.tolist()
+            self.metadata[a] = v
 
         parameters = getattr(ds, "parameters")
 
