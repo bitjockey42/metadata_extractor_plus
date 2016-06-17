@@ -94,7 +94,10 @@ class MetadataExtractor(object):
                     for subkey,subvalue in value.iteritems():
                         self.metadata["parameters"][key][subkey] = subvalue
                 else:
-                    self.metadata["parameters"][key] = str(value)
+                    if hasattr(value, "tolist"):
+                        value = value.tolist()
+
+                    self.metadata["parameters"][key] = value
 
     def _setMetadata(self):
         """
