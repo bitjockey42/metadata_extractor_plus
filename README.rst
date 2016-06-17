@@ -26,7 +26,7 @@ If you want to test out the development version of ``yt`` with the metadata extr
 
 Then from the "Admin console" enable "Metadata Extractor Plus".
 
-*NOTE* I can't get the extractor to fire off just yet. But you can test it by uploading a `yt`-supported dataset.
+=== Debugging ===
 
 Then, navigate to the girder item page. e.g. http://localhost:8080/#item/57632981e640ae56cbf20ec9
 
