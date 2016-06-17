@@ -80,8 +80,9 @@ class MetadataExtractor(object):
         parameters = getattr(ds, "parameters")
 
         if parameters:
+            self.metadata["parameters"] = dict()
             for key,value in parameters.iteritems():
-                self.metadata[key] = str(value)
+                self.metadata["parameters"][key] = str(value)
 
     def _setMetadata(self):
         """
