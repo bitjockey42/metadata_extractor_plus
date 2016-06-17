@@ -1,10 +1,12 @@
-This is a plugin intended to extend the functionality of the `metadata_extractor` plugin for [girder](https://github.com/girder/girder).
+This is a plugin intended to extend the functionality of the `metadata_extractor` plugin for girder_.
+
+.. _girder: https://github.com/girder/girder
 
 To try it out, clone to the ``plugins`` directory of ``girder``:
 
 ::
 
-   cd /path/to/girder
+   cd /path/to/girder/src
    python setup.py develop # this will put girder in development mode
    cd /path/to/girder/plugins
    git clone https://github.com/0x414A/metadata_extractor_plus
@@ -26,7 +28,8 @@ If you want to test out the development version of ``yt`` with the metadata extr
 
 Then from the "Admin console" enable "Metadata Extractor Plus".
 
-=== Debugging ===
+Debugging
+-----------------
 
 Then, navigate to the girder item page. e.g. http://localhost:8080/#item/57632981e640ae56cbf20ec9
 
