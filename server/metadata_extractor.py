@@ -19,6 +19,8 @@
 
 import os
 import six
+import types
+import numpy
 
 from yt import load as load_dataset
 
@@ -75,14 +77,23 @@ class MetadataExtractor(object):
         ds = load_dataset(self.path)
 
         for a in attrs:
-            self.metadata[a] = str(getattr(ds, a, None))
+            value = getattr(ds, a, None)
+            if isinstance(value, numpy.ndarray) and len(value.shape) > 0:
+                self.metadata[a] = [str(item) for item in value]
+            else:
+                self.metadata[a] = str(getattr(ds, a, None))
 
         parameters = getattr(ds, "parameters")
 
         if parameters:
             self.metadata["parameters"] = dict()
             for key,value in parameters.iteritems():
-                self.metadata["parameters"][key] = str(value)
+                if isinstance(value, types.DictType):
+                    self.metadata["parameters"][key] = dict()
+                    for subkey,subvalue in value.iteritems():
+                        self.metadata["parameters"][key][subkey] = subvalue
+                else:
+                    self.metadata["parameters"][key] = str(value)
 
     def _setMetadata(self):
         """
