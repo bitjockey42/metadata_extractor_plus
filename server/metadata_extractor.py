@@ -18,11 +18,8 @@
 ###############################################################################
 
 import os
-import six
-import types
-import numpy
 
-from yt import load as load_dataset
+from yt.utilities.metadata import get_metadata
 
 try:
     from girder.utility.model_importer import ModelImporter
@@ -58,46 +55,7 @@ class MetadataExtractor(object):
         """
         Extract metadata from file on client or server using hachoir-metadata.
         """
-        self.metadata = dict()
-
-        attrs = ("dimensionality",
-                 "refine_by",
-                 "domain_dimensions",
-                 "current_time",
-                 "domain_left_edge",
-                 "domain_right_edge",
-                 "unique_identifier",
-                 "current_redshift",
-                 "cosmological_simulation",
-                 "omega_matter",
-                 "omega_lambda",
-                 "hubble_constant",
-                 "dataset_type")
-
-        ds = load_dataset(self.path)
-
-        for a in attrs:
-            v = getattr(ds, a, None)
-            if v is None:
-                continue
-            if hasattr(v, "tolist"):
-                v = v.tolist()
-            self.metadata[a] = v
-
-        parameters = getattr(ds, "parameters")
-
-        if parameters:
-            self.metadata["parameters"] = dict()
-            for key,value in parameters.iteritems():
-                if isinstance(value, types.DictType):
-                    self.metadata["parameters"][key] = dict()
-                    for subkey,subvalue in value.iteritems():
-                        self.metadata["parameters"][key][subkey] = subvalue
-                else:
-                    if hasattr(value, "tolist"):
-                        value = value.tolist()
-
-                    self.metadata["parameters"][key] = value
+        self.metadata = get_metadata(self.path, full_output=True)
 
     def _setMetadata(self):
         """

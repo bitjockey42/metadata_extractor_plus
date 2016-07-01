@@ -9,14 +9,14 @@ from girder.utility.server import configureServer
 configureServer()
 
 # Now we can load the data
-DEFAULT_PATH="/Volumes/data/aj/Developer/data/yt/acisf05356N003_evt2.fits"
-DEFAULT_ITEMID="57631cb4e640ae56cbec1d5a"
+DEFAULT_PATH="/Users/aj/Downloads/MOOSE_sample_data/out.e"
+DEFAULT_ITEMID="5776d27be640ae7fe41a8182"
 
 from girder.plugins.metadata_extractor_plus import metadata_extractor as mep
 from girder.utility.model_importer import ModelImporter
 
 def load_metadata(path, itemId):
-    print "Loading metadata for %s with itemId %s" % (path, itemId)
+    print("Loading metadata for %s with itemId %s" % (path, itemId))
     m = mep.MetadataExtractor(path, itemId)
     m.extractMetadata()
     return m
